@@ -1072,7 +1072,7 @@ attitude<float> Gimbal_Interface::get_gimbal_attitude(void)
             _messages.timestamps.mount_orientation = 0;
             const mavlink_mount_orientation_t &orient = _messages.mount_orientation;
             pthread_mutex_unlock(&_messages.mutex);
-            return attitude<float>(orient.roll, orient.pitch, orient.yaw);
+            return attitude<float>(orient.roll, orient.pitch, orient.yaw, orient.yaw_absolute);
         }
 
     } else {

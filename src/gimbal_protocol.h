@@ -45,30 +45,34 @@
 // ------------------------------------------------------------------------------
 template<typename T>
 struct attitude {
-    T roll  = 0;
-    T pitch = 0;
-    T yaw   = 0;
+    T roll         = 0;
+    T pitch        = 0;
+    T yaw          = 0;
+    T yaw_absolute = 0;
 
     static constexpr float DEG2RAD = M_PI / 180.f;
     static constexpr float RAD2DEG = 180.f / M_PI;
 
     attitude() = default;
-    attitude(T val) : roll(val), pitch(val), yaw(val) {};
-    attitude(T r, T p, T y) : roll(r), pitch(p), yaw(y) {};
+    attitude(T val) : roll(val), pitch(val), yaw(val), yaw_absolute(val) {};
+    attitude(T r, T p, T y) : roll(r), pitch(p), yaw(y), yaw_absolute(0) {};
+    attitude(T r, T p, T y, T y_abs) : roll(r), pitch(p), yaw(y), yaw_absolute(y_abs) {};
 
     attitude &to_rad(void)
     {
-        roll  *= DEG2RAD;
-        pitch *= DEG2RAD;
-        yaw   *= DEG2RAD;
+        roll         *= DEG2RAD;
+        pitch        *= DEG2RAD;
+        yaw          *= DEG2RAD;
+        yaw_absolute *= DEG2RAD;
         return *this;
     }
 
     attitude &to_deg(void)
     {
-        roll  *= RAD2DEG;
-        pitch *= RAD2DEG;
-        yaw   *= RAD2DEG;
+        roll         *= RAD2DEG;
+        pitch        *= RAD2DEG;
+        yaw          *= RAD2DEG;
+        yaw_absolute *= RAD2DEG;
         return *this;
     }
 };
